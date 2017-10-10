@@ -1,5 +1,5 @@
 # EddyApp
-Educational App made with ReactNative/ReactJS + Lottie/Bodymovin Plugin. Currently hosted on Amazon EC2
+Educational App made with ReactNative/ReactJS + Lottie/Bodymovin Plugin. Currently hosted on Amazon EC2, Ubuntu instance.
 
 Comment 10/10/2017, 5:49:
 
