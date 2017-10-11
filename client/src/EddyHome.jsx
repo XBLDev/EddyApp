@@ -27,7 +27,12 @@ const bodymovin = require('bodymovin/build/player/bodymovin_light')
 function Welcome(props) {
 
   let result = props.stateNum == props.targetNum? 
-  <div><ReactBodymovin options={{loop: true, autoplay: true, prerender: true, animationData: props.CAN}} /> </div> : 
+  <div className="animationContainer" id={"acontainer".concat(props.targetNum)}>
+  <ReactBodymovin options={{ rendererSettings:{preserveAspectRatio:  'xMaxyMax slice'}, 
+  container: document.getElementById("acontainer".concat(props.targetNum)), 
+  renderer: 'svg', loop: true, autoplay: true, prerender: true, animationData: props.CAN}} /> 
+  </div> 
+  : 
   <div></div>
   
   return result;
@@ -91,13 +96,13 @@ class EddyHome extends Component {
     //  '6': animation_TwitterHeart,
     //  '7': animation_Watermelon,
 
-     '0': Nike_Logo,    
+     '0': Train_Scene, //Nike_Logo   
      '1': Hospital_Bed,
      '2': Hospital_Bed,
 
      '3': Hospital_Bed,
      '4': Smoke_Scene,
-     '5': Train_Scene,
+     '5': Nike_Logo,
      '6': Batteries,
     //  '7': animation_Watermelon,   
 
@@ -237,37 +242,29 @@ returnCurrentAnimation(props)
             </div>
 
             <div className="container">
-                <div id="bm" className="innterContainer" onClick={this.handleClick}>
+                <div id="bm" className="innerContainer" onClick={this.handleClick}>
                       
-                          {/*{<StoryAnimations numberOfAnimations={this.numberOfAnimations} pageNum={this.state.pageNum} CAN={this.namesOfAnimation[this.state.pageNum]}/>}*/}
                           {indents}
-                          {/*<Welcome stateNum={this.state.pageNum} targetNum={0} CAN={this.namesOfAnimation[this.state.pageNum]}/>
-                          <Welcome stateNum={this.state.pageNum} targetNum={1} CAN={this.namesOfAnimation[this.state.pageNum]}/>
-                          <Welcome stateNum={this.state.pageNum} targetNum={2} CAN={this.namesOfAnimation[this.state.pageNum]}/>
-                          <Welcome stateNum={this.state.pageNum} targetNum={3} CAN={this.namesOfAnimation[this.state.pageNum]}/>
-                          <Welcome stateNum={this.state.pageNum} targetNum={4} CAN={this.namesOfAnimation[this.state.pageNum]}/>
-                          <Welcome stateNum={this.state.pageNum} targetNum={5} CAN={this.namesOfAnimation[this.state.pageNum]}/>
-                          <Welcome stateNum={this.state.pageNum} targetNum={6} CAN={this.namesOfAnimation[this.state.pageNum]}/>
-                          <Welcome stateNum={this.state.pageNum} targetNum={7} CAN={this.namesOfAnimation[this.state.pageNum]}/>*/}
+
 
                        
                 </div>
 
             </div>
 
-            <div className="buttonGroup" >
+            {/* <div className="buttonGroup" >
                 <button className="optionButton" onClick={this.handleClickBottomButton}>option1</button>
                 <button className="optionButton" onClick={this.handleClickBottomButton}>option2</button>
                 <button className="optionButton" onClick={this.handleClickBottomButton}>option3</button>
-             </div>
+             </div> */}
 
     
-             <div className="BottomButtons">
+             {/* <div className="BottomButtons">
                   <a href="" className="bottomButton">About Us</a>
                   <a href="" className="bottomButton">Contact Us</a>
                   <a href="" className="bottomButton">Team</a>
                   <a href="" className="bottomButton">Facebook</a>
-             </div>   
+             </div>    */}
          </div> 
               
         

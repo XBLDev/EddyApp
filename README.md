@@ -1,6 +1,14 @@
 # EddyApp
 Educational App made with ReactNative/ReactJS + Lottie/Bodymovin Plugin. Currently hosted on Amazon EC2, Ubuntu instance.
 
+Comment 11/10/2017, 2:43:
+
+Attempted making the size of the Bodymovin animation responsive, or at least fit into the surrounding styled div tags, but
+failed, the size of animations, or rather the size of "ReactBodymovin" element, is still not adjustable. For now the bottom
+contact links are removed so it won't look weird with the animation going through it.
+
+The problem is possibly related to the "preserveAspectRatio" attribute. A post that addresses the issue: https://github.com/bodymovin/bodymovin/issues/85
+
 Comment 10/10/2017, 5:49:
 
 I think ReactJS + NodeJS + Amazon EC2 is a better stack than ReactJS + Meteor, because of the speed of development:

@@ -22745,9 +22745,10 @@ function Welcome(props) {
 
   var result = props.stateNum == props.targetNum ? _react2.default.createElement(
     'div',
-    null,
-    _react2.default.createElement(_reactBodymovin2.default, { options: { loop: true, autoplay: true, prerender: true, animationData: props.CAN } }),
-    ' '
+    { className: 'animationContainer', id: "acontainer".concat(props.targetNum) },
+    _react2.default.createElement(_reactBodymovin2.default, { options: { rendererSettings: { preserveAspectRatio: 'xMaxyMax slice' },
+        container: document.getElementById("acontainer".concat(props.targetNum)),
+        renderer: 'svg', loop: true, autoplay: true, prerender: true, animationData: props.CAN } })
   ) : _react2.default.createElement('div', null);
 
   return result;
@@ -22810,13 +22811,13 @@ var EddyHome = function (_Component) {
       //  '6': animation_TwitterHeart,
       //  '7': animation_Watermelon,
 
-      '0': _NikeLogo2.default,
+      '0': _Group1Image4TrainScene2.default, //Nike_Logo   
       '1': _Group1Image2HospitalBed2.default,
       '2': _Group1Image2HospitalBed2.default,
 
       '3': _Group1Image2HospitalBed2.default,
       '4': _Group1Image4SmokeScene2.default,
-      '5': _Group1Image4TrainScene2.default,
+      '5': _NikeLogo2.default,
       '6': _Group1Image6Batteries2.default
       //  '7': animation_Watermelon,   
 
@@ -22963,51 +22964,8 @@ var EddyHome = function (_Component) {
           { className: 'container' },
           _react2.default.createElement(
             'div',
-            { id: 'bm', className: 'innterContainer', onClick: this.handleClick },
+            { id: 'bm', className: 'innerContainer', onClick: this.handleClick },
             indents
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'buttonGroup' },
-          _react2.default.createElement(
-            'button',
-            { className: 'optionButton', onClick: this.handleClickBottomButton },
-            'option1'
-          ),
-          _react2.default.createElement(
-            'button',
-            { className: 'optionButton', onClick: this.handleClickBottomButton },
-            'option2'
-          ),
-          _react2.default.createElement(
-            'button',
-            { className: 'optionButton', onClick: this.handleClickBottomButton },
-            'option3'
-          )
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'BottomButtons' },
-          _react2.default.createElement(
-            'a',
-            { href: '', className: 'bottomButton' },
-            'About Us'
-          ),
-          _react2.default.createElement(
-            'a',
-            { href: '', className: 'bottomButton' },
-            'Contact Us'
-          ),
-          _react2.default.createElement(
-            'a',
-            { href: '', className: 'bottomButton' },
-            'Team'
-          ),
-          _react2.default.createElement(
-            'a',
-            { href: '', className: 'bottomButton' },
-            'Facebook'
           )
         )
       );
