@@ -1,6 +1,12 @@
 # EddyApp
 Educational App made with ReactNative/ReactJS + Lottie/Bodymovin Plugin. Currently hosted on Amazon EC2, Ubuntu instance.
 
+How to run:
+1. git pull https://github.com/XBLDev/EddyApp.git
+2. npm install
+3. Open a terminal, enter: npm start
+4. Open another terminal, enter: npm run bundle
+
 Comment 11/10/2017, 2:43:
 
 Attempted making the size of the Bodymovin animation responsive, or at least fit into the surrounding styled div tags, but
