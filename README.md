@@ -1,11 +1,25 @@
 # EddyApp
 Educational App made with ReactNative/ReactJS + Lottie/Bodymovin Plugin. Currently hosted on Amazon EC2, Ubuntu instance.
 
-How to run:
-1. git pull https://github.com/XBLDev/EddyApp.git
-2. npm install
-3. Open a terminal, enter: npm start
-4. Open another terminal, enter: npm run bundle
+Comment 20/10/2017, 3:47:
+
+Updates today:
+
+1. Added the mobile/Android version of this app, the original code needs to be upgraded/modified because of RN/Lottie version
+upgrades, therefore it will take a while before it can catch up.
+
+2. The frond end now can read/get list of story animation URLs from backend, which reads the records from MongoDB from mLab.
+This is to prepare for future large-scale development: currently for an animation to play, the file has to be put on the server
+first, and hard coded into the program. In the future ideally the user can choose a story at the front end, and once a story is 
+chosen it can get the URLs of animations which are Amazon S3, download them to a folder, and play them one by one. This way the 
+server can host only the code necessary, and keep the files on S3, which is more suitable for file storage.
+
+A self-note: for a mongoose model, unless defined a collection name when the model is defined, it won't find anything from any 
+collection, even if the collection shares the same name with the model.
+
+3. The size of the animation is for now semi-adjustable: because the animation scales itself with the width of its container no 
+matter how the CSS is set, the only way to stop it from scaling seems to be setting a max-width to its container. It's no 
+good but at least for now the animation won't stretch itself all the way out of the screen. 
 
 Comment 11/10/2017, 2:43:
 
