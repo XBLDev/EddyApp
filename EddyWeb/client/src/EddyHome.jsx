@@ -36,7 +36,8 @@ import ReactBodymovin from 'react-bodymovin'
 
 
 // import Task from './Task.jsx';
-import animation_LottieLogo1 from './LottieLogo1.json'
+// import animation_LottieLogo1 from './LottieLogo1.json'
+import animation_LottieLogo1 from '../../server/static/animations/LottieLogo1.json'
 import animation_LottieLogo2 from './LottieLogo2.json'
 import animation_LineAnimation from './LineAnimation.json'
 import animation_LottieWalkthrough from './LottieWalkthrough.json'
@@ -45,14 +46,21 @@ import animation_PinJump from './PinJump.json'
 import animation_TwitterHeart from './TwitterHeart.json'
 import animation_Watermelon from './Watermelon.json'
 
-import Nike_Logo from './Nike Logo.json'
-import Car_Accident from './Group 1 Image 1 Car Accident.json'
-import Hospital_Bed from './Group 1 Image 2 Hospital Bed.json'
-import Fat_Man_Walking from './Group 1 Image 4 Fat Man Walking.json'
-import Smoke_Scene from './Group 1 Image 4 Smoke scene.json'
-import Train_Scene from './Group 1 Image 4 Train Scene.json'
-import Batteries from './Group 1 Image 6 Batteries .json'
+// import Nike_Logo from './Nike Logo.json'
+// import Car_Accident from './Group 1 Image 1 Car Accident.json'
+// import Hospital_Bed from './Group 1 Image 2 Hospital Bed.json'
+// import Fat_Man_Walking from './Group 1 Image 4 Fat Man Walking.json'
+// import Smoke_Scene from './Group 1 Image 4 Smoke scene.json'
+// import Train_Scene from './Group 1 Image 4 Train Scene.json'
+// import Batteries from './Group 1 Image 6 Batteries .json'
 
+import Nike_Logo from '../../server/static/animations/Nike Logo.json'
+import Car_Accident from '../../server/static/animations/Group 1 Image 1 Car Accident.json'
+import Hospital_Bed from '../../server/static/animations/Group 1 Image 2 Hospital Bed.json'
+import Fat_Man_Walking from '../../server/static/animations/Group 1 Image 4 Fat Man Walking.json'
+import Smoke_Scene from '../../server/static/animations/Group 1 Image 4 Smoke scene.json'
+import Train_Scene from '../../server/static/animations/Group 1 Image 4 Train Scene.json'
+import Batteries from '../../server/static/animations/Group 1 Image 6 Batteries .json'
 
 
 const bodymovin = require('bodymovin/build/player/bodymovin_light')
@@ -211,7 +219,9 @@ const xhr = new XMLHttpRequest();
         });
         // console.log('RightSideMenu, recieved list of news upon Mounting:')
         console.log(this.state.NumberOfStories)
+        // console.log(this.state.listOfStoryURLS[0]['storyFileUrls'])
         console.log(this.state.listOfStoryURLS)
+
     }
     });
     xhr.send();    

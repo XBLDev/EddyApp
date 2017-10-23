@@ -1,6 +1,17 @@
 # EddyApp
 Educational App made with ReactNative/ReactJS + Lottie/Bodymovin Plugin. Currently hosted on Amazon EC2, Ubuntu instance.
 
+Comment 23/10/2017, 8:26:
+
+The backend now can download an animation based on an animation URL and save it on a temp folder on server. 
+
+Presumably in the future if an user already got a story, then the same user should be able to access the story when logged in. 
+If the backend doesn't want to re-download everything whenever an user chooses a story, then maybe the temp folder should exist
+on the backend, until for some reason the server decides to delete some files, perhaps to make room for some other animations.
+
+The async function of writing stream to a file should be happening after the file is completely loaded, but it seems that will 
+pipe function, it can be omitted. The downloaded file sometimes is 0 sized for some reason, will investigate later.
+
 Comment 20/10/2017, 3:47:
 
 Updates today:

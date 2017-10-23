@@ -22737,7 +22737,48 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 // import Task from './Task.jsx';
+// import animation_LottieLogo1 from './LottieLogo1.json'
+// import animation_LottieLogo2 from './LottieLogo2.json'
+// import animation_LineAnimation from './LineAnimation.json'
+// import animation_LottieWalkthrough from './LottieWalkthrough.json'
+// import animation_MotionCorpse from './MotionCorpse-Jrcanest.json'
+// import animation_PinJump from './PinJump.json'
+// import animation_TwitterHeart from './TwitterHeart.json'
+// import animation_Watermelon from './Watermelon.json'
 
+// import Nike_Logo from './Nike Logo.json'
+// import Car_Accident from './Group 1 Image 1 Car Accident.json'
+// import Hospital_Bed from './Group 1 Image 2 Hospital Bed.json'
+// import Fat_Man_Walking from './Group 1 Image 4 Fat Man Walking.json'
+// import Smoke_Scene from './Group 1 Image 4 Smoke scene.json'
+// import Train_Scene from './Group 1 Image 4 Train Scene.json'
+// import Batteries from './Group 1 Image 6 Batteries .json'
+
+// import CapeMoving from './Group 1 Image 8 Cape Moving.json'
+// import SneakingAround from './Group 1 Image 9 Sneaking around .json'
+// import Binoculars from './Group 1 Image 12 Binoculars.json'
+// import JumpingToEachStep from './Group 2 Image 1 Jumping to each step.json'
+// import BalancingAtTheDoor from './Group 2 Image 2 Balancing at the door.json'
+// import LightingAndClogs from './Group 2 Image 5 Lighting and Clogs.json'
+// import EddyAtDesk from './Group 2 Image 7 Eddy at Desk.json'
+// import Confetti from './Group 2 Image 8 Confetti.json'
+
+// import UFO2 from './Group 2 Image 13 UFO 2.json'
+// import ShootingStar from './Group 2 Image 14 Shooting Star.json'
+// import HeadsPopping from './Group 2 Image 15 Heads Popping.json'
+
+
+// import Task from './Task.jsx';
+// import animation_LottieLogo1 from './LottieLogo1.json'
+
+
+// import Nike_Logo from './Nike Logo.json'
+// import Car_Accident from './Group 1 Image 1 Car Accident.json'
+// import Hospital_Bed from './Group 1 Image 2 Hospital Bed.json'
+// import Fat_Man_Walking from './Group 1 Image 4 Fat Man Walking.json'
+// import Smoke_Scene from './Group 1 Image 4 Smoke scene.json'
+// import Train_Scene from './Group 1 Image 4 Train Scene.json'
+// import Batteries from './Group 1 Image 6 Batteries .json'
 
 var bodymovin = __webpack_require__(78);
 
@@ -22894,6 +22935,7 @@ var EddyHome = function (_Component) {
           });
           // console.log('RightSideMenu, recieved list of news upon Mounting:')
           console.log(_this2.state.NumberOfStories);
+          // console.log(this.state.listOfStoryURLS[0]['storyFileUrls'])
           console.log(_this2.state.listOfStoryURLS);
         }
       });
