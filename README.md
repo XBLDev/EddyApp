@@ -24,7 +24,6 @@ This is to prepare for future large-scale development: currently for an animatio
 first, and hard coded into the program. In the future ideally the user can choose a story at the front end, and once a story is 
 chosen it can get the URLs of animations which are Amazon S3, download them to a folder, and play them one by one. This way the 
 server can host only the code necessary, and keep the files on S3, which is more suitable for file storage.
-
 A self-note: for a mongoose model, unless defined a collection name when the model is defined, it won't find anything from any 
 collection, even if the collection shares the same name with the model.
 
