@@ -114,32 +114,54 @@ router.get('/EddyStories', (req, res) => {
         }
         else
         {
-            console.log(Values[0]['storyFileUrls']);
-            var filename = Values[0]['storyFileUrls'][0].substring(Values[0]['storyFileUrls'][0].lastIndexOf('/')+1, Values[0]['storyFileUrls'][0].length);
-            // filename = filename.replace('+', ' ');
+ 
+            // console.log(Values[0]['storyFileUrls']);
+            // var filename = Values[0]['storyFileUrls'][0].substring(Values[0]['storyFileUrls'][0].lastIndexOf('/')+1, Values[0]['storyFileUrls'][0].length);
+            // // filename = filename.replace('+', ' ');
             
-            filename = filename.split('+').join("");
-            // console.log(Values[0]['storyFileUrls'][0].substring(Values[0]['storyFileUrls'][0].lastIndexOf('/')+1, Values[0]['storyFileUrls'][0].length));
-            console.log(filename);
+            // filename = filename.split('+').join("");
+            // // console.log(Values[0]['storyFileUrls'][0].substring(Values[0]['storyFileUrls'][0].lastIndexOf('/')+1, Values[0]['storyFileUrls'][0].length));
+            // console.log(filename);
             
+            // res.status(200).json({
+            //     message: Values.length,
+            //     // message: Values.toString(),
+            //     listOfStoryURLS: 'first story name: '.concat(filename)
+            // });   
 
             var fs = require('fs');
-            var file = fs.createWriteStream('./server/static/animations/'.concat(filename));
-            
+            // var file = fs.createWriteStream('./server/static/animations/'.concat(filename));
+            // var file = fs.createWriteStream('./server/'.concat(filename));
+            var https = require('https');     
+            var animationNames = [];
 
-            var https = require('https');            
-            https.get(Values[0]['storyFileUrls'][0], function(response) {
+            for(var i = 0; i < 1; i++){    
+            
+            var filename = Values[0]['storyFileUrls'][i].substring(Values[0]['storyFileUrls'][i].lastIndexOf('/')+1, Values[0]['storyFileUrls'][i].length);
+            filename = filename.split('+').join("");
+            console.log(filename);
+            animationNames.push(filename);
+            var file = fs.createWriteStream('./server/static/animations/'.concat(filename));
+                
+            https.get(Values[0]['storyFileUrls'][i], function(response) {
+
+
 
                 response.pipe(file);
 
                 file.on('finish', function() {
-                  console.log('SERVER: ANIMATION SAVED ON SERVER!');
+                  console.log('SERVER: ANIMATION DOWNLOADED FROM SERVER: ',Values[0]['storyFileUrls'][i]);
                   file.close();  // close() is async, call cb after close completes.
-                  res.status(200).json({
-                    message: Values.length,
-                    listOfStoryURLS: []
-                    // message: 'SERVER: GOT ENTIRE FILE IN A STRING FROM THE FILE: '.concat(newsURL['ContentURLCH'])
-                  });                                     
+                  if(i == 0)//Values[0]['storyFileUrls'].length - 1
+                  {
+                    console.log('SERVER: LAST FILE DOWNLOADED, COMMUNICATING BACK TO FRONTEND');    
+                    res.status(200).json({
+                        message: Values[0]['storyFileUrls'].length,
+                        listOfStoryURLS: animationNames.toString()
+                        // message: 'SERVER: GOT ENTIRE FILE IN A STRING FROM THE FILE: '.concat(newsURL['ContentURLCH'])
+                    });
+                  }
+                  
                 });
                 
                 // response.on('data', function (chunk) {
@@ -167,12 +189,13 @@ router.get('/EddyStories', (req, res) => {
                 res.status(200).json({
                     message: -1,
                     // message: Values.toString(),
-                    listOfStoryURLS: []
-                });                    
+                    listOfStoryURLS: 'no file downloaded or saved'
+                });
+                // res.end();                    
                 // fs.unlink(dest); // Delete the file async. (But we don't check the result)
                 // if (cb) cb(err.message);
-              });;            
-
+              });            
+            }    
             // res.status(200).json({
             //     message: Values.length,
             //     // message: Values.toString(),

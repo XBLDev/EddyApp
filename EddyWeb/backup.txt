@@ -1,0 +1,4 @@
+    "start": "nodemon --use_strict EddyHome.js",
+
+    "start": "node EddyHome.js",
+

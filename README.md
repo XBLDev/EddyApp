@@ -1,6 +1,20 @@
 # EddyApp
 Educational App made with ReactNative/ReactJS + Lottie/Bodymovin Plugin. Currently hosted on Amazon EC2, Ubuntu instance.
 
+Comment 25/10/2017, 3:33:
+
+The file can now be properly downloaded to the animation folder on server. Previously the problem was that, because nodemon 
+refreshes the whole thing whenever a file is added/modified/deleted, and it happens right after the download is finished and 
+the filestream is ready to write all that data to a file, therefore the file is never properly added, or rather it's always 
+empty because the filestream never actaully gets a chance to write, and the frontend gets no message also because of this. The
+solution is that I use nodemon and webpack to compile whenever I make a code change, and use node command to run the app when 
+I want to see the actual result, this way it won't refresh itself when a file is downloaded/added.
+
+Tried downloading and writing multiple files with https request and filestream with a simple for loop, doesn't work. The idea
+is that when the var i reaches the maximum number of URL - 1 it sends the JSON back and end everything, but it gives something 
+like memory leak detected error, and the frontend never gets anything. Maybe I have to use a recursive function that takes 
+the maximum number of animations as a parameter.
+
 Comment 23/10/2017, 8:26:
 
 The backend now can download an animation based on an animation URL and save it on a temp folder on server. 
