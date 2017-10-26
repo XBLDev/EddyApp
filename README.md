@@ -1,6 +1,17 @@
 # EddyApp
 Educational App made with ReactNative/ReactJS + Lottie/Bodymovin Plugin. Currently hosted on Amazon EC2, Ubuntu instance.
 
+Comment 26/10/2017, 5:54:
+
+The files of a certain story can now be downloaded using a recursive function which passes https, fs, animation array, 
+current iteration number, total iteration number needed, and the res which returns the message as its parameters, and when 
+the current iteration number is not total iteration number, upon finishing downloading one file it calls the function recursively
+with an increased iteration number, and when it reaches maximum iteration, res returns the message.
+
+Now it is possible for the front end to choose different stories by passing story number as a parameter and let the backend 
+download the missing animations needed. To save the number of downloading maybe the backend can first check the files kept in the
+backend first, and download only the missing ones.
+
 Comment 25/10/2017, 3:33:
 
 The file can now be properly downloaded to the animation folder on server. Previously the problem was that, because nodemon 

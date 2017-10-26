@@ -80,6 +80,94 @@ EddyStoryModel.find().count(function(err, count){
 })
 
 
+function testfunc(currentNumberOfAnimation, res)
+{
+    // res.status(200).json({
+    //     message: 7,
+    //     listOfStoryURLS: []
+    //     // message: 'SERVER: GOT ENTIRE FILE IN A STRING FROM THE FILE: '.concat(newsURL['ContentURLCH'])
+    // });
+
+    if(currentNumberOfAnimation == 5)
+    {
+        res.status(200).json({
+            message: 7,
+            listOfStoryURLS: []
+            // message: 'SERVER: GOT ENTIRE FILE IN A STRING FROM THE FILE: '.concat(newsURL['ContentURLCH'])
+        });
+    }
+    else
+    {
+        console.log(currentNumberOfAnimation);
+        testfunc(currentNumberOfAnimation+1, res);
+    }
+}
+
+
+function downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, currentNumberOfAnimation, totalNumberOfAnimations, res)
+{
+    if(currentNumberOfAnimation == totalNumberOfAnimations)
+    {
+        console.log("BACKEND: ALL FILES DOWNLOADED");
+        res.status(200).json({
+            message: arrayOfFileUrls.length,
+            listOfStoryURLS: arrayOfFileUrls.toString()
+            // message: 'SERVER: GOT ENTIRE FILE IN A STRING FROM THE FILE: '.concat(newsURL['ContentURLCH'])
+        });
+    }
+    else
+    {
+        // console.log(currentNumberOfAnimation);
+        var filename = arrayOfFileUrls[currentNumberOfAnimation];
+        
+        // var filename = arrayOfFileUrls['storyFileUrls'][currentNumberOfAnimation];
+
+        var filename = filename.substring
+        (filename.lastIndexOf('/')+1, 
+         filename.length);
+
+        filename = filename.split('+').join(""); 
+        console.log(filename);
+        var file = p_fs.createWriteStream('./server/static/animations/'.concat(filename));
+
+        p_https.get(arrayOfFileUrls[currentNumberOfAnimation], function(response) {
+            
+            response.pipe(file);
+
+            file.on('finish', function() {
+                console.log('SERVER: ANIMATION DOWNLOADED FROM SERVER: ',arrayOfFileUrls[currentNumberOfAnimation]);
+                file.close();  // close() is async, call cb after close completes.
+                downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, currentNumberOfAnimation+1, totalNumberOfAnimations, res)    
+                // console.log('SERVER: LAST FILE DOWNLOADED, COMMUNICATING BACK TO FRONTEND');    
+                // res.status(200).json({
+                //     message: Values[0]['storyFileUrls'].length,
+                //     listOfStoryURLS: animationNames.toString()
+                //     // message: 'SERVER: GOT ENTIRE FILE IN A STRING FROM THE FILE: '.concat(newsURL['ContentURLCH'])
+                // });
+                
+                
+            }).on('error', function(err) { 
+                console.log(err);
+                file.close();
+                res.status(200).json({
+                    message: -1,
+                    // message: Values.toString(),
+                    listOfStoryURLS: 'no file downloaded or saved'
+                });
+
+                });
+    
+        });    
+
+
+        // downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, currentNumberOfAnimation+1, totalNumberOfAnimations, res)          
+
+   
+    }   
+}
+
+
+
 router.get('/EddyStories', (req, res) => {
 
     console.log("BACKEND: GET EddyStories CALLED")
@@ -93,13 +181,15 @@ router.get('/EddyStories', (req, res) => {
     //             });                     
     //         }
     //         else
-    //         {
+    //         {}
     //             console.log('Call of GET EddyStories Failed');
     //             res.status(200).json({
     //                 message: -1,
     //             });                       
     //         }            
     // })
+
+
 
     
     EddyStoryModel.find({}, 'storyFileUrls -_id', function(err, Values){
@@ -115,7 +205,7 @@ router.get('/EddyStories', (req, res) => {
         else
         {
  
-            // console.log(Values[0]['storyFileUrls']);
+            console.log(Values[0]['storyFileUrls']);
             // var filename = Values[0]['storyFileUrls'][0].substring(Values[0]['storyFileUrls'][0].lastIndexOf('/')+1, Values[0]['storyFileUrls'][0].length);
             // // filename = filename.replace('+', ' ');
             
@@ -123,11 +213,7 @@ router.get('/EddyStories', (req, res) => {
             // // console.log(Values[0]['storyFileUrls'][0].substring(Values[0]['storyFileUrls'][0].lastIndexOf('/')+1, Values[0]['storyFileUrls'][0].length));
             // console.log(filename);
             
-            // res.status(200).json({
-            //     message: Values.length,
-            //     // message: Values.toString(),
-            //     listOfStoryURLS: 'first story name: '.concat(filename)
-            // });   
+
 
             var fs = require('fs');
             // var file = fs.createWriteStream('./server/static/animations/'.concat(filename));
@@ -135,67 +221,77 @@ router.get('/EddyStories', (req, res) => {
             var https = require('https');     
             var animationNames = [];
 
-            for(var i = 0; i < 1; i++){    
+            //for(var i = 0; i < 1; i++){    
             
-            var filename = Values[0]['storyFileUrls'][i].substring(Values[0]['storyFileUrls'][i].lastIndexOf('/')+1, Values[0]['storyFileUrls'][i].length);
+            var filename = Values[0]['storyFileUrls'][0].substring(Values[0]['storyFileUrls'][0].lastIndexOf('/')+1, Values[0]['storyFileUrls'][0].length);
             filename = filename.split('+').join("");
-            console.log(filename);
-            animationNames.push(filename);
-            var file = fs.createWriteStream('./server/static/animations/'.concat(filename));
+            // console.log(filename);
+
+            // testfunc(0, res);
+            downloadAllAnimations(https, fs, Values[0]['storyFileUrls'], 0, Values[0]['storyFileUrls'].length, res);
+
+            // res.status(200).json({
+            //     message: 7,
+            //     // message: Values.toString(),
+            //     listOfStoryURLS: []
+            // });   
+
+
+            // animationNames.push(filename);
+            // var file = fs.createWriteStream('./server/static/animations/'.concat(filename));
                 
-            https.get(Values[0]['storyFileUrls'][i], function(response) {
+            // https.get(Values[0]['storyFileUrls'][0], function(response) {
 
 
 
-                response.pipe(file);
+            //     response.pipe(file);
 
-                file.on('finish', function() {
-                  console.log('SERVER: ANIMATION DOWNLOADED FROM SERVER: ',Values[0]['storyFileUrls'][i]);
-                  file.close();  // close() is async, call cb after close completes.
-                  if(i == 0)//Values[0]['storyFileUrls'].length - 1
-                  {
-                    console.log('SERVER: LAST FILE DOWNLOADED, COMMUNICATING BACK TO FRONTEND');    
-                    res.status(200).json({
-                        message: Values[0]['storyFileUrls'].length,
-                        listOfStoryURLS: animationNames.toString()
-                        // message: 'SERVER: GOT ENTIRE FILE IN A STRING FROM THE FILE: '.concat(newsURL['ContentURLCH'])
-                    });
-                  }
+            //     file.on('finish', function() {
+            //       console.log('SERVER: ANIMATION DOWNLOADED FROM SERVER: ',Values[0]['storyFileUrls'][0]);
+            //       file.close();  // close() is async, call cb after close completes.
+
+            //         console.log('SERVER: LAST FILE DOWNLOADED, COMMUNICATING BACK TO FRONTEND');    
+            //         res.status(200).json({
+            //             message: Values[0]['storyFileUrls'].length,
+            //             listOfStoryURLS: animationNames.toString()
+            //             // message: 'SERVER: GOT ENTIRE FILE IN A STRING FROM THE FILE: '.concat(newsURL['ContentURLCH'])
+            //         });
                   
-                });
+                  
+            //     }).on('error', function(err) { 
+            //         console.log(err);
+            //         res.status(200).json({
+            //             message: -1,
+            //             // message: Values.toString(),
+            //             listOfStoryURLS: 'no file downloaded or saved'
+            //         });
+            //         // res.end();                    
+            //         // fs.unlink(dest); // Delete the file async. (But we don't check the result)
+            //         // if (cb) cb(err.message);
+            //       });
                 
-                // response.on('data', function (chunk) {
-                //     console.log('SERVER: downloading the first animation......');
-                //         // console.log('SERVER: chuck data: ',chunk);
-                //         // str += chunk;
-                // });
+            //     // response.on('data', function (chunk) {
+            //     //     console.log('SERVER: downloading the first animation......');
+            //     //         // console.log('SERVER: chuck data: ',chunk);
+            //     //         // str += chunk;
+            //     // });
                 
-                // response.on('end', function () {
-                //         // console.log(str);
-                //         console.log('SERVER FINISHED DOWNLOADING ANIMATION: ',Values[0]['storyFileUrls'][0]);
-                //         res.status(200).json({
-                //             message: Values.length,
-                //             listOfStoryURLS: []
-                //             // message: 'SERVER: GOT ENTIRE FILE IN A STRING FROM THE FILE: '.concat(newsURL['ContentURLCH'])
-                //         });                             
-                // });
+            //     // response.on('end', function () {
+            //     //         // console.log(str);
+            //     //         console.log('SERVER FINISHED DOWNLOADING ANIMATION: ',Values[0]['storyFileUrls'][0]);
+            //     //         res.status(200).json({
+            //     //             message: Values.length,
+            //     //             listOfStoryURLS: []
+            //     //             // message: 'SERVER: GOT ENTIRE FILE IN A STRING FROM THE FILE: '.concat(newsURL['ContentURLCH'])
+            //     //         });                             
+            //     // });
 
-            //   response.pipe(file);
-            //   file.on('finish', function() {
-            //     file.close(cb);
-            //   });
-            }).on('error', function(err) { 
-                console.log(err);
-                res.status(200).json({
-                    message: -1,
-                    // message: Values.toString(),
-                    listOfStoryURLS: 'no file downloaded or saved'
-                });
-                // res.end();                    
-                // fs.unlink(dest); // Delete the file async. (But we don't check the result)
-                // if (cb) cb(err.message);
-              });            
-            }    
+            // //   response.pipe(file);
+            // //   file.on('finish', function() {
+            // //     file.close(cb);
+            // //   });
+            // });            
+            //    
             // res.status(200).json({
             //     message: Values.length,
             //     // message: Values.toString(),
