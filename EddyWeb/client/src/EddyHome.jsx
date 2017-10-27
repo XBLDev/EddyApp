@@ -134,6 +134,7 @@ class EddyHome extends Component {
     listOfStoryURLS: [],
     pageNum: 0,
     clicked: false,
+    animationsLoading: false,
     // currentAnimationName: animation_LottieLogo1,
     // currentAnimationDIV: <ReactBodymovin options={{loop: true, autoplay: true, prerender: true, animationData: animation_LottieLogo1}} />,
 
@@ -217,6 +218,10 @@ const xhr = new XMLHttpRequest();
         this.setState({
           listOfStoryURLS: xhr.response.listOfStoryURLS
         });
+        this.setState({
+          animationsLoading: true
+        });
+
         // console.log('RightSideMenu, recieved list of news upon Mounting:')
         console.log(this.state.NumberOfStories)
         // console.log(this.state.listOfStoryURLS[0]['storyFileUrls'])
@@ -326,8 +331,13 @@ returnCurrentAnimation(props)
             <div className="container">
                 <div className="innerContainer" onClick={this.handleClick}>
                       
-                          {
+                          {this.state.animationsLoading == true?
+                          (
                             indents
+                          ):
+                          (
+                              'LOADING ANIMATIONS FROM BACK END, PLEASE WAIT......'
+                          )
                           }    
 
                        

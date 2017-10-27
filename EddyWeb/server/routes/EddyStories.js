@@ -104,14 +104,17 @@ function testfunc(currentNumberOfAnimation, res)
 }
 
 
-function downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, currentNumberOfAnimation, totalNumberOfAnimations, res)
+function downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, animationNames, currentNumberOfAnimation, totalNumberOfAnimations, res)
 {
+    //../../server/static/animations/
     if(currentNumberOfAnimation == totalNumberOfAnimations)
     {
         console.log("BACKEND: ALL FILES DOWNLOADED");
         res.status(200).json({
             message: arrayOfFileUrls.length,
-            listOfStoryURLS: arrayOfFileUrls.toString()
+            // listOfStoryURLS: arrayOfFileUrls.toString()
+            listOfStoryURLS: animationNames
+            
             // message: 'SERVER: GOT ENTIRE FILE IN A STRING FROM THE FILE: '.concat(newsURL['ContentURLCH'])
         });
     }
@@ -137,7 +140,8 @@ function downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, currentNumberOfAn
             file.on('finish', function() {
                 console.log('SERVER: ANIMATION DOWNLOADED FROM SERVER: ',arrayOfFileUrls[currentNumberOfAnimation]);
                 file.close();  // close() is async, call cb after close completes.
-                downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, currentNumberOfAnimation+1, totalNumberOfAnimations, res)    
+                animationNames.push('../../server/static/animations/'.concat(filename));
+                downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, animationNames, currentNumberOfAnimation+1, totalNumberOfAnimations, res)    
                 // console.log('SERVER: LAST FILE DOWNLOADED, COMMUNICATING BACK TO FRONTEND');    
                 // res.status(200).json({
                 //     message: Values[0]['storyFileUrls'].length,
@@ -228,7 +232,7 @@ router.get('/EddyStories', (req, res) => {
             // console.log(filename);
 
             // testfunc(0, res);
-            downloadAllAnimations(https, fs, Values[0]['storyFileUrls'], 0, Values[0]['storyFileUrls'].length, res);
+            downloadAllAnimations(https, fs, Values[0]['storyFileUrls'], animationNames, 0, Values[0]['storyFileUrls'].length, res);
 
             // res.status(200).json({
             //     message: 7,

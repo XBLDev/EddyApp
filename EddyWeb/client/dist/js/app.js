@@ -22844,7 +22844,8 @@ var EddyHome = function (_Component) {
       NumberOfStories: 0,
       listOfStoryURLS: [],
       pageNum: 0,
-      clicked: false
+      clicked: false,
+      animationsLoading: false
       // currentAnimationName: animation_LottieLogo1,
       // currentAnimationDIV: <ReactBodymovin options={{loop: true, autoplay: true, prerender: true, animationData: animation_LottieLogo1}} />,
 
@@ -22933,6 +22934,10 @@ var EddyHome = function (_Component) {
           _this2.setState({
             listOfStoryURLS: xhr.response.listOfStoryURLS
           });
+          _this2.setState({
+            animationsLoading: true
+          });
+
           // console.log('RightSideMenu, recieved list of news upon Mounting:')
           console.log(_this2.state.NumberOfStories);
           // console.log(this.state.listOfStoryURLS[0]['storyFileUrls'])
@@ -23037,7 +23042,7 @@ var EddyHome = function (_Component) {
           _react2.default.createElement(
             'div',
             { className: 'innerContainer', onClick: this.handleClick },
-            indents
+            this.state.animationsLoading == true ? indents : 'LOADING ANIMATIONS FROM FRONT END'
           )
         ),
         _react2.default.createElement(
