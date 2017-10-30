@@ -132,6 +132,7 @@ function downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, animationNames, c
         filename = filename.split('+').join(""); 
         console.log(filename);
         var file = p_fs.createWriteStream('./server/static/animations/'.concat(filename));
+        // var file = p_fs.createWriteStream('./client/src/'.concat(filename));
 
         p_https.get(arrayOfFileUrls[currentNumberOfAnimation], function(response) {
             
@@ -140,7 +141,8 @@ function downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, animationNames, c
             file.on('finish', function() {
                 console.log('SERVER: ANIMATION DOWNLOADED FROM SERVER: ',arrayOfFileUrls[currentNumberOfAnimation]);
                 file.close();  // close() is async, call cb after close completes.
-                animationNames.push('../../server/static/animations/'.concat(filename));
+                // animationNames.push('../../server/static/animations/'.concat(filename));
+                animationNames.push('./animations/'.concat(filename));
                 downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, animationNames, currentNumberOfAnimation+1, totalNumberOfAnimations, res)    
                 // console.log('SERVER: LAST FILE DOWNLOADED, COMMUNICATING BACK TO FRONTEND');    
                 // res.status(200).json({

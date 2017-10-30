@@ -28,7 +28,7 @@ import ReactBodymovin from 'react-bodymovin'
 // import BalancingAtTheDoor from './Group 2 Image 2 Balancing at the door.json'
 // import LightingAndClogs from './Group 2 Image 5 Lighting and Clogs.json'
 // import EddyAtDesk from './Group 2 Image 7 Eddy at Desk.json'
-// import Confetti from './Group 2 Image 8 Confetti.json'
+import Confetti from './Group 2 Image 8 Confetti.json'
 
 // import UFO2 from './Group 2 Image 13 UFO 2.json'
 // import ShootingStar from './Group 2 Image 14 Shooting Star.json'
@@ -49,7 +49,7 @@ import animation_Watermelon from '../../server/static/animations/Watermelon.json
 // import Nike_Logo from './Nike Logo.json'
 // import Car_Accident from './Group 1 Image 1 Car Accident.json'
 // import Hospital_Bed from './Group 1 Image 2 Hospital Bed.json'
-// import Fat_Man_Walking from './Group 1 Image 4 Fat Man Walking.json'
+import Fat_Man_Walking from './Group 1 Image 4 Fat Man Walking.json'
 // import Smoke_Scene from './Group 1 Image 4 Smoke scene.json'
 // import Train_Scene from './Group 1 Image 4 Train Scene.json'
 // import Batteries from './Group 1 Image 6 Batteries .json'
@@ -57,14 +57,45 @@ import animation_Watermelon from '../../server/static/animations/Watermelon.json
 import Nike_Logo from '../../server/static/animations/Nike Logo.json'
 import Car_Accident from '../../server/static/animations/Group 1 Image 1 Car Accident.json'
 import Hospital_Bed from '../../server/static/animations/Group 1 Image 2 Hospital Bed.json'
-import Fat_Man_Walking from '../../server/static/animations/Group 1 Image 4 Fat Man Walking.json'
+// import Fat_Man_Walking from '../../server/static/animations/Group 1 Image 4 Fat Man Walking.json'
 import Smoke_Scene from '../../server/static/animations/Group 1 Image 4 Smoke scene.json'
 import Train_Scene from '../../server/static/animations/Group 1 Image 4 Train Scene.json'
 import Batteries from '../../server/static/animations/Group 1 Image 6 Batteries .json'
 
+import Angry_Eye from './Group 1 Image Angry Eye.json'
+import Angry_Eye_Eating from './Group 1 Image Angry Eye eating.json'
+
+
 
 const bodymovin = require('bodymovin/build/player/bodymovin_light')
 
+
+
+function Animationstories(props){
+  let result = props.statenum == props.targetnum? 
+  <div className="animationContainer">
+        <ReactBodymovin options=
+            {
+              { 
+              rendererSettings:{preserveAspectRatio:  'xMidYMid meet'}, 
+              // container: document.getElementById("acontainer".concat(props.targetNum)), 
+              renderer: 'svg', 
+              loop: true, 
+              autoplay: true, 
+              prerender: true, 
+              path: props.animationpath
+
+              // animationData: require(props.animationpath)
+              }
+            }
+        /> 
+  </div> 
+  : 
+  <div></div>
+  
+  return result;
+
+}
 
 function Welcome(props) {
 
@@ -79,7 +110,8 @@ function Welcome(props) {
               loop: true, 
               autoplay: true, 
               prerender: true, 
-              animationData: props.CAN
+              path: props.CAN
+              // animationData: props.CAN
               }
             }
         /> 
@@ -130,11 +162,12 @@ class EddyHome extends Component {
 
 
   this.state = {
-    NumberOfStories: 0,
+    NumberOfStorieAnimations: 0,
     listOfStoryURLS: [],
     pageNum: 0,
     clicked: false,
-    animationsLoading: false,
+    animationsLoaded: false,
+    listOfCurrentAnimations: []
     // currentAnimationName: animation_LottieLogo1,
     // currentAnimationDIV: <ReactBodymovin options={{loop: true, autoplay: true, prerender: true, animationData: animation_LottieLogo1}} />,
 
@@ -151,14 +184,14 @@ class EddyHome extends Component {
     //  '6': animation_TwitterHeart,
     //  '7': animation_Watermelon,
 
-     '0': Train_Scene, //Nike_Logo   
-     '1': Hospital_Bed,
-     '2': Hospital_Bed,
+    //  '0': Train_Scene, //Nike_Logo   
+    //  '1': Hospital_Bed,
+    //  '2': Hospital_Bed,
 
-     '3': Hospital_Bed,
-     '4': Smoke_Scene,
-     '5': Nike_Logo,
-     '6': Batteries,
+    //  '3': Hospital_Bed,
+    //  '4': Smoke_Scene,
+    //  '5': Nike_Logo,
+    //  '6': Batteries,
     //  '7': animation_Watermelon,   
 
 
@@ -172,21 +205,29 @@ class EddyHome extends Component {
     //  '6': Batteries,
 
 
+    //  '0': Fat_Man_Walking,//NOT WORKING, ERROR: EffectsManager is not defined
+    //  '1': Angry_Eye_Eating,
+    //  '2': Angry_Eye,
+    //  '3': Confetti,
+     '0': './Group 1 Image 4 Fat Man Walking.json',
+     '1': './Group 1 Image Angry Eye eating.json',
+     '2': './Group 1 Image Angry Eye.json',
+     '3': './Group 2 Image 8 Confetti.json',
     }
 
-  this.targetNums = {
-     '0': 0,
-     '1': 1,
-     '2': 2,
+  // this.targetNums = {
+  //    '0': 0,
+  //    '1': 1,
+  //    '2': 2,
 
-     '3': 3,
-     '4': 4,
-     '5': 5,
-     '6': 6,
-    //  '7': 7,
-    }
+  //    '3': 3,
+  //    '4': 4,
+  //    '5': 5,
+  //    '6': 6,
+  //   //  '7': 7,
+  //   }
 
-  this.numberOfAnimations = 7;//8
+  this.numberOfAnimations = 4;//8
   this.handleClick = this.handleClick.bind(this);
   this.handleClickBottomButton = this.handleClickBottomButton.bind(this);
 
@@ -213,19 +254,35 @@ const xhr = new XMLHttpRequest();
     if (xhr.status === 200) {
         // console.log('Right Side Menu Got GET /NEWS');
         this.setState({
-          NumberOfStories: xhr.response.message
-        });
-        this.setState({
+          NumberOfStorieAnimations: xhr.response.message,
           listOfStoryURLS: xhr.response.listOfStoryURLS
         });
+        // this.setState({
+        //   listOfStoryURLS: xhr.response.listOfStoryURLS
+        // });
         this.setState({
-          animationsLoading: true
+          animationsLoaded: true
         });
 
         // console.log('RightSideMenu, recieved list of news upon Mounting:')
-        console.log(this.state.NumberOfStories)
+        console.log(this.state.NumberOfStorieAnimations)
         // console.log(this.state.listOfStoryURLS[0]['storyFileUrls'])
         console.log(this.state.listOfStoryURLS)
+
+        // var currentStoryAnimations = [];
+        // for (var i = 0; i < this.state.NumberOfStories; i++) {
+        //   // indents.push(<span className='indent' key={i}></span>);
+        //   currentStoryAnimations.push
+        //   (
+        //     <animationStories 
+        //       key={i} 
+        //       stateNum={this.state.pageNum} 
+        //       targetNum={i} 
+        //       animationPath={this.state.listOfStoryURLS[i]}
+        //     />
+        //   );
+        // }
+        // console.log(currentStoryAnimations);
 
     }
     });
@@ -248,7 +305,7 @@ returnCurrentAnimation(props)
 
   handleClick() {
     // alert("clicked")
-    if(this.state.pageNum + 1 == 7)
+    if(this.state.pageNum + 1 == this.numberOfAnimations)
     {
       this.setState({pageNum: 0});
     }
@@ -297,43 +354,45 @@ returnCurrentAnimation(props)
 
   render() {
 
-    var indents = [];
-    for (var i = 0; i < this.numberOfAnimations; i++) {
+    // var indents = [];
+    // for (var i = 0; i < this.numberOfAnimations; i++) {
+    //   // indents.push(<span className='indent' key={i}></span>);
+    //   indents.push(<Welcome key={i} stateNum={this.state.pageNum} targetNum={i} CAN={this.namesOfAnimation[this.state.pageNum]}/>);
+    // }
+
+
+
+    var sas = [];
+    for (var i = 0; i < this.state.NumberOfStorieAnimations; i++) {
       // indents.push(<span className='indent' key={i}></span>);
-      indents.push(<Welcome key={i} stateNum={this.state.pageNum} targetNum={i} CAN={this.namesOfAnimation[this.state.pageNum]}/>);
+      sas.push(<Animationstories key={i} 
+      statenum={this.state.pageNum} 
+      targetnum={i} 
+      animationpath={this.state.listOfStoryURLS[this.state.pageNum]}/>);
     }
-    // let currentAnimation =  this.state.pageNum == 0 ? 
-    // <div><ReactBodymovin options={{loop: true, autoplay: true, prerender: true, animationData: animation_LottieLogo1}} /> </div>: 
-    // <div><ReactBodymovin options={{loop: true, autoplay: true, prerender: true, animationData: animation_LottieLogo2}} /></div>
 
 
-    
-
-    // let currentStateNum = this.state.pageNum
-    // let currentCAN =  this.namesOfAnimation[this.state.pageNum]
 
 
     return (
         <div className="outerMostContainer">
-            {/*<header style={{textAlign: 'center', height: '5vh', fontSize: '20px', backgroundColor:'rgba(0, 102, 102,0.9)'
-                          ,color:'white', fontWeight: 'bold', verticalAlign: 'middle', textAlignVertical: 'middle'}}>
-              
-              EDDY: YOUR MOBILE UNIVERSITY, COMING SOON
-              
-            </header> */}
 
             <div className="headerElements">
               {/* <h1> */}
-              EDDY: YOUR MOBILE UNIVERSITY, COMING SOON, CURRENT NUMBER OF STORIES: {this.state.NumberOfStories}
+              EDDY: YOUR MOBILE UNIVERSITY, COMING SOON, CURRENT NUMBER OF STORIES: {this.state.NumberOfStorieAnimations}
               {/* </h1> */}
             </div>
 
             <div className="container">
                 <div className="innerContainer" onClick={this.handleClick}>
                       
-                          {this.state.animationsLoading == true?
-                          (
+                          {/* {
                             indents
+                          } */}
+
+                          {this.state.animationsLoaded == true?
+                          (
+                            sas
                           ):
                           (
                               'LOADING ANIMATIONS FROM BACK END, PLEASE WAIT......'
