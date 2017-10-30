@@ -1,6 +1,12 @@
 # EddyApp
 Educational App made with ReactNative/ReactJS + Lottie/Bodymovin Plugin. Currently hosted on Amazon EC2, Ubuntu instance.
 
+Comment 30/10/2017, 4:26:
+
+The front end now can wait the backend to download all the animations, and use the downloaded animations paths it gets from the backend
+to load the animations so now it has no need to hardcode the path URLs in the frontend anymore, as long as the front end can pass a story
+number to the backend it will eventually get a list of URLs which tell the frontend where the animations are.
+
 Comment 27/10/2017, 8:10:
 
 The front end now waits for the backend to download and return a list of the downloaded files on the server backend, before it loads
