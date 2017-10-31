@@ -104,28 +104,123 @@ function testfunc(currentNumberOfAnimation, res)
 }
 
 
-function downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, animationNames, currentNumberOfAnimation, totalNumberOfAnimations, res)
+function checkIfFilesExist(p_https, p_fs, downloadAnimationArray, arrayOfFileUrls, currentNumberOfAnimation, 
+    totalNumberOfAnimations, animationNames, res)
+{
+
+
+//     fs.stat('foo.txt', function(err, stat) {
+//     if(err == null) {
+//         console.log('File exists');
+//     } else if(err.code == 'ENOENT') {
+//         // file does not exist
+//         fs.writeFile('log.txt', 'Some log\n');
+//     } else {
+//         console.log('Some other error: ', err.code);
+//     }
+// });
+
+    if(currentNumberOfAnimation != totalNumberOfAnimations)
+    {
+        var filename = arrayOfFileUrls[currentNumberOfAnimation];
+        var filename = filename.substring
+        (filename.lastIndexOf('/')+1, 
+         filename.length);
+
+        filename = filename.split('+').join(""); 
+        // console.log(filename);  
+        p_fs.stat('./server/static/animations/'.concat(filename), function(err, stat) {
+            if(err == null) {
+                console.log('File: ',filename,' exists, no need to download');
+                // currentNumberOfAnimation += 1;
+                checkIfFilesExist(p_https, p_fs, downloadAnimationArray, arrayOfFileUrls, currentNumberOfAnimation+1, 
+                    totalNumberOfAnimations, animationNames, res);
+
+            } else if(err.code == 'ENOENT') {
+                // file does not exist
+                // fs.writeFile('log.txt', 'Some log\n');
+                console.log('File: ',filename,' needs to be downloaded');
+                // currentNumberOfAnimation += 1;
+                downloadAnimationArray.push(arrayOfFileUrls[currentNumberOfAnimation]);
+                checkIfFilesExist(p_https, p_fs, downloadAnimationArray, arrayOfFileUrls, currentNumberOfAnimation+1, 
+                    totalNumberOfAnimations, animationNames, res);
+            } else {
+                console.log('Some other error: ', err.code);
+                // currentNumberOfAnimation += 1;
+                checkIfFilesExist(p_https, p_fs, downloadAnimationArray, arrayOfFileUrls, currentNumberOfAnimation+1, 
+                    totalNumberOfAnimations, animationNames, res);
+
+            }
+        });
+    }
+    else
+    {
+        console.log('The files that need to be downloaded: ', downloadAnimationArray);
+
+        downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, animationNames, 0, 
+        downloadAnimationArray.length,
+        // Values[0]['storyFileUrls'].length, 
+        res, downloadAnimationArray);
+
+    }
+
+    // /./server/static/animations/
+    // for(var i = 0; i < arrayOfFileUrls.length; i++)
+    // {
+    //     var filename = arrayOfFileUrls[i];
+    //     var filename = filename.substring
+    //     (filename.lastIndexOf('/')+1, 
+    //      filename.length);
+
+    //     filename = filename.split('+').join(""); 
+    //     console.log(filename);        
+    // }
+
+
+
+
+
+    // return [];
+}
+
+
+// function checkIfFileNameExist(file, ) {
+//     return age >= 18;
+// }
+
+
+function downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, animationNames, currentNumberOfAnimation, 
+    totalNumberOfAnimations, res, animationsNeedDownload)
 {
     //../../server/static/animations/
     if(currentNumberOfAnimation == totalNumberOfAnimations)
     {
         console.log("BACKEND: ALL FILES DOWNLOADED");
+        for(var i = 0; i< arrayOfFileUrls.length; i++)
+        {
+            var filename = arrayOfFileUrls[i];
+            filename = filename.substring(filename.lastIndexOf('/')+1, 
+                filename.length);
+
+            filename = filename.split('+').join(""); 
+            animationNames.push('./animations/'.concat(filename));
+        }
+
         res.status(200).json({
             message: arrayOfFileUrls.length,
-            // listOfStoryURLS: arrayOfFileUrls.toString()
-            listOfStoryURLS: animationNames
-            
-            // message: 'SERVER: GOT ENTIRE FILE IN A STRING FROM THE FILE: '.concat(newsURL['ContentURLCH'])
+            listOfStoryURLS: animationNames            
         });
     }
     else
     {
         // console.log(currentNumberOfAnimation);
-        var filename = arrayOfFileUrls[currentNumberOfAnimation];
-        
+        // var filename = arrayOfFileUrls[currentNumberOfAnimation];
+        // console.log();
+        var filename = animationsNeedDownload[currentNumberOfAnimation];
+
         // var filename = arrayOfFileUrls['storyFileUrls'][currentNumberOfAnimation];
 
-        var filename = filename.substring
+        filename = filename.substring
         (filename.lastIndexOf('/')+1, 
          filename.length);
 
@@ -134,16 +229,18 @@ function downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, animationNames, c
         var file = p_fs.createWriteStream('./server/static/animations/'.concat(filename));
         // var file = p_fs.createWriteStream('./client/src/'.concat(filename));
 
-        p_https.get(arrayOfFileUrls[currentNumberOfAnimation], function(response) {
+
+        p_https.get(animationsNeedDownload[currentNumberOfAnimation], function(response) {
             
             response.pipe(file);
 
             file.on('finish', function() {
-                console.log('SERVER: ANIMATION DOWNLOADED FROM SERVER: ',arrayOfFileUrls[currentNumberOfAnimation]);
+                console.log('SERVER: ANIMATION DOWNLOADED FROM SERVER: ',animationsNeedDownload[currentNumberOfAnimation]);
                 file.close();  // close() is async, call cb after close completes.
                 // animationNames.push('../../server/static/animations/'.concat(filename));
-                animationNames.push('./animations/'.concat(filename));
-                downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, animationNames, currentNumberOfAnimation+1, totalNumberOfAnimations, res)    
+                // animationNames.push('./animations/'.concat(filename));
+                downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, animationNames, 
+                    currentNumberOfAnimation+1, totalNumberOfAnimations, res, animationsNeedDownload);    
                 // console.log('SERVER: LAST FILE DOWNLOADED, COMMUNICATING BACK TO FRONTEND');    
                 // res.status(200).json({
                 //     message: Values[0]['storyFileUrls'].length,
@@ -158,7 +255,7 @@ function downloadAllAnimations(p_https, p_fs, arrayOfFileUrls, animationNames, c
                 res.status(200).json({
                     message: -1,
                     // message: Values.toString(),
-                    listOfStoryURLS: 'no file downloaded or saved'
+                    listOfStoryURLS: ['no file downloaded or saved']
                 });
 
                 });
@@ -211,7 +308,7 @@ router.get('/EddyStories', (req, res) => {
         else
         {
  
-            console.log(Values[0]['storyFileUrls']);
+            // console.log(Values[0]['storyFileUrls']);
             // var filename = Values[0]['storyFileUrls'][0].substring(Values[0]['storyFileUrls'][0].lastIndexOf('/')+1, Values[0]['storyFileUrls'][0].length);
             // // filename = filename.replace('+', ' ');
             
@@ -229,12 +326,19 @@ router.get('/EddyStories', (req, res) => {
 
             //for(var i = 0; i < 1; i++){    
             
-            var filename = Values[0]['storyFileUrls'][0].substring(Values[0]['storyFileUrls'][0].lastIndexOf('/')+1, Values[0]['storyFileUrls'][0].length);
-            filename = filename.split('+').join("");
+            // var filename = Values[0]['storyFileUrls'][0].substring(Values[0]['storyFileUrls'][0].lastIndexOf('/')+1, Values[0]['storyFileUrls'][0].length);
+            // filename = filename.split('+').join("");
             // console.log(filename);
 
+
+            var animationsNeedDownload = [];
+            checkIfFilesExist(https, fs, animationsNeedDownload, Values[0]['storyFileUrls'], 0 , 
+            Values[0]['storyFileUrls'].length, animationNames, res);
             // testfunc(0, res);
-            downloadAllAnimations(https, fs, Values[0]['storyFileUrls'], animationNames, 0, Values[0]['storyFileUrls'].length, res);
+            // downloadAllAnimations(https, fs, Values[0]['storyFileUrls'], animationNames, 0, 
+            // animationsNeedDownload.length,
+            // // Values[0]['storyFileUrls'].length, 
+            // res, animationsNeedDownload);
 
             // res.status(200).json({
             //     message: 7,

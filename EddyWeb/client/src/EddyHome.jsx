@@ -28,7 +28,7 @@ import ReactBodymovin from 'react-bodymovin'
 // import BalancingAtTheDoor from './Group 2 Image 2 Balancing at the door.json'
 // import LightingAndClogs from './Group 2 Image 5 Lighting and Clogs.json'
 // import EddyAtDesk from './Group 2 Image 7 Eddy at Desk.json'
-import Confetti from './Group 2 Image 8 Confetti.json'
+// import Confetti from './Group 2 Image 8 Confetti.json'
 
 // import UFO2 from './Group 2 Image 13 UFO 2.json'
 // import ShootingStar from './Group 2 Image 14 Shooting Star.json'
@@ -37,33 +37,33 @@ import Confetti from './Group 2 Image 8 Confetti.json'
 
 // import Task from './Task.jsx';
 // import animation_LottieLogo1 from './LottieLogo1.json'
-import animation_LottieLogo1 from '../../server/static/animations/LottieLogo1.json'
-import animation_LottieLogo2 from '../../server/static/animations/LottieLogo2.json'
-import animation_LineAnimation from '../../server/static/animations/LineAnimation.json'
-import animation_LottieWalkthrough from '../../server/static/animations/LottieWalkthrough.json'
-import animation_MotionCorpse from '../../server/static/animations/MotionCorpse-Jrcanest.json'
-import animation_PinJump from '../../server/static/animations/PinJump.json'
-import animation_TwitterHeart from '../../server/static/animations/TwitterHeart.json'
-import animation_Watermelon from '../../server/static/animations/Watermelon.json'
+// import animation_LottieLogo1 from '../../server/static/animations/LottieLogo1.json'
+// import animation_LottieLogo2 from '../../server/static/animations/LottieLogo2.json'
+// import animation_LineAnimation from '../../server/static/animations/LineAnimation.json'
+// import animation_LottieWalkthrough from '../../server/static/animations/LottieWalkthrough.json'
+// import animation_MotionCorpse from '../../server/static/animations/MotionCorpse-Jrcanest.json'
+// import animation_PinJump from '../../server/static/animations/PinJump.json'
+// import animation_TwitterHeart from '../../server/static/animations/TwitterHeart.json'
+// import animation_Watermelon from '../../server/static/animations/Watermelon.json'
 
 // import Nike_Logo from './Nike Logo.json'
 // import Car_Accident from './Group 1 Image 1 Car Accident.json'
 // import Hospital_Bed from './Group 1 Image 2 Hospital Bed.json'
-import Fat_Man_Walking from './Group 1 Image 4 Fat Man Walking.json'
+// import Fat_Man_Walking from './Group 1 Image 4 Fat Man Walking.json'
 // import Smoke_Scene from './Group 1 Image 4 Smoke scene.json'
 // import Train_Scene from './Group 1 Image 4 Train Scene.json'
 // import Batteries from './Group 1 Image 6 Batteries .json'
 
-import Nike_Logo from '../../server/static/animations/Nike Logo.json'
-import Car_Accident from '../../server/static/animations/Group 1 Image 1 Car Accident.json'
-import Hospital_Bed from '../../server/static/animations/Group 1 Image 2 Hospital Bed.json'
-// import Fat_Man_Walking from '../../server/static/animations/Group 1 Image 4 Fat Man Walking.json'
-import Smoke_Scene from '../../server/static/animations/Group 1 Image 4 Smoke scene.json'
-import Train_Scene from '../../server/static/animations/Group 1 Image 4 Train Scene.json'
-import Batteries from '../../server/static/animations/Group 1 Image 6 Batteries .json'
+// import Nike_Logo from '../../server/static/animations/Nike Logo.json'
+// import Car_Accident from '../../server/static/animations/Group 1 Image 1 Car Accident.json'
+// import Hospital_Bed from '../../server/static/animations/Group 1 Image 2 Hospital Bed.json'
+// // import Fat_Man_Walking from '../../server/static/animations/Group 1 Image 4 Fat Man Walking.json'
+// import Smoke_Scene from '../../server/static/animations/Group 1 Image 4 Smoke scene.json'
+// import Train_Scene from '../../server/static/animations/Group 1 Image 4 Train Scene.json'
+// import Batteries from '../../server/static/animations/Group 1 Image 6 Batteries .json'
 
-import Angry_Eye from './Group 1 Image Angry Eye.json'
-import Angry_Eye_Eating from './Group 1 Image Angry Eye eating.json'
+// import Angry_Eye from './Group 1 Image Angry Eye.json'
+// import Angry_Eye_Eating from './Group 1 Image Angry Eye eating.json'
 
 
 
@@ -379,7 +379,7 @@ returnCurrentAnimation(props)
 
             <div className="headerElements">
               {/* <h1> */}
-              EDDY: YOUR MOBILE UNIVERSITY, COMING SOON, CURRENT NUMBER OF STORIES: {this.state.NumberOfStorieAnimations}
+              EDDY: YOUR MOBILE UNIVERSITY, COMING SOON, NUMBER OF ANIMATIONS FOR CURRENT STORY: {this.state.NumberOfStorieAnimations}
               {/* </h1> */}
             </div>
 

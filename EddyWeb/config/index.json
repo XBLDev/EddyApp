@@ -1,4 +1,4 @@
 {
-  "dbUri": "mongodb://SOMEURL",
+  "dbUri": "mongodb://someurl",
   "jwtSecret": "a secret phrase!!"
 }
