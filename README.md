@@ -1,6 +1,10 @@
 # EddyApp
 Educational App made with ReactNative/ReactJS + Lottie/Bodymovin Plugin. Currently hosted on Amazon EC2, Ubuntu instance.
 
+Comment 31/10/2017, 5:04:
+
+The backend can now check if the story animations are already downloaded with a recursive function, and if the animations are already downloaded they won't be again, only the non-exist animations will be downloaded, and the front end gets the animations and load them immediately. The next step would be to let the backend when downloading the animations create a sub-directory in the animation folder based on the story number got from the front end XMLHttp request, and the next time it gets another request demanding the animations for the same story, it check if animations exist in that sub-directory. Also since some animations require images, S3 has to keep the images for each story and these images have to be downloaded as well.
+
 Comment 30/10/2017, 4:26:
 
 The front end now can wait the backend to download all the animations, and use the downloaded animations paths it gets from the backend
