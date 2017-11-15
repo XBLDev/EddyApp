@@ -22886,7 +22886,7 @@ var EddyHome = function (_Component) {
       //   //  '7': 7,
       //   }
 
-    };_this.numberOfAnimations = 4; //8
+    };_this.numberOfAnimations = 9; //8
     _this.handleClick = _this.handleClick.bind(_this);
     _this.handleClickBottomButton = _this.handleClickBottomButton.bind(_this);
 
@@ -22970,10 +22970,13 @@ var EddyHome = function (_Component) {
     key: 'handleClick',
     value: function handleClick() {
       // alert("clicked")
-      if (this.state.pageNum + 1 == this.numberOfAnimations) {
+      if (this.state.pageNum + 1 == this.state.NumberOfStorieAnimations) {
+
         this.setState({ pageNum: 0 });
+        console.log(this.state.listOfStoryURLS[this.state.pageNum]);
       } else {
         this.setState({ pageNum: this.state.pageNum + 1 });
+        console.log(this.state.listOfStoryURLS[this.state.pageNum]);
       }
       // this.setState({currentAnimationName: animation_LottieLogo2});
       // this.setState({currentAnimationDIV: <ReactBodymovin options={{loop: true, autoplay: true, prerender: true, animationData: animation_LottieLogo2}} />});
@@ -22989,41 +22992,9 @@ var EddyHome = function (_Component) {
 
       this.setState({ pageNum: randomAnimationNum });
     }
-
-    //  imgurl = 'https://previews.123rf.com/images/venimo/venimo1501/venimo150100067/35963137-Vector-online-education-concept-in-flat-style-hand-holding-mobile-phone-with-educational-app-in-the--Stock-Vector.jpg'; 
-
-    //  bodymovinOptions = {
-    //     loop: false,
-    //     autoplay: true,
-    //     prerender: true,
-    //     animationData: animation_LottieLogo1
-
-    //   };
-    //  divStyle = {
-    //   // color: 'blue',
-    //   backgroundImage: 'url(' + this.imgurl + ')',
-    //   backgroundSize: 'cover',
-    //   backgroundColor: 'blue',
-
-    //     flex: 1,
-    //     justifyContent: 'center',
-    //     alignItems: 'center'
-    // };
-
-    // ReactBodymovinStyle ={
-    //   backgroundColor: 'red',
-    // }
-
   }, {
     key: 'render',
     value: function render() {
-
-      // var indents = [];
-      // for (var i = 0; i < this.numberOfAnimations; i++) {
-      //   // indents.push(<span className='indent' key={i}></span>);
-      //   indents.push(<Welcome key={i} stateNum={this.state.pageNum} targetNum={i} CAN={this.namesOfAnimation[this.state.pageNum]}/>);
-      // }
-
 
       var sas = [];
       for (var i = 0; i < this.state.NumberOfStorieAnimations; i++) {
@@ -23033,6 +23004,12 @@ var EddyHome = function (_Component) {
           targetnum: i,
           animationpath: this.state.listOfStoryURLS[this.state.pageNum] }));
       }
+
+      // sas.push(<Animationstories key={0} 
+      //   statenum={0} 
+      //   targetnum={0} 
+      //   animationpath={'./animations/Group1Image2HospitalBed.json'}/>);
+
 
       return _react2.default.createElement(
         'div',
