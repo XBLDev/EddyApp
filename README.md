@@ -1,6 +1,14 @@
 # EddyApp
 Educational App made with ReactNative/ReactJS + Lottie/Bodymovin Plugin. Currently hosted on Amazon EC2, Ubuntu instance.
 
+Comment 15/11/2017, 5:27:
+
+Tested 2 animations, the same error that happens when testing other animations which use images, they don't seem to work on android. Post issue about this: https://github.com/airbnb/lottie-react-native/issues/228
+
+It seems that with at least ReactBodymovin, certain file names won't be recognised if it contains some symbols such as %. Getting rid of the symbol from the file name solves the problem.
+
+Given the time it takes to develop app on android and the usability of animations on android, it's probably worth consider shifting the development to web and make the app mobile-friendly, which will provide the same service and shorten the development time.
+
 Comment 31/10/2017, 5:04:
 
 The backend can now check if the story animations are already downloaded with a recursive function, and if the animations are already downloaded they won't be again, only the non-exist animations will be downloaded, and the front end gets the animations and load them immediately. The next step would be to let the backend when downloading the animations create a sub-directory in the animation folder based on the story number got from the front end XMLHttp request, and the next time it gets another request demanding the animations for the same story, it check if animations exist in that sub-directory. Also since some animations require images, S3 has to keep the images for each story and these images have to be downloaded as well.
