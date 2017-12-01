@@ -22971,12 +22971,13 @@ var EddyHome = function (_Component) {
     value: function handleClick() {
       // alert("clicked")
       if (this.state.pageNum + 1 == this.state.NumberOfStorieAnimations) {
+        console.log(this.state.listOfStoryURLS[this.state.pageNum]);
 
         this.setState({ pageNum: 0 });
-        console.log(this.state.listOfStoryURLS[this.state.pageNum]);
       } else {
-        this.setState({ pageNum: this.state.pageNum + 1 });
         console.log(this.state.listOfStoryURLS[this.state.pageNum]);
+
+        this.setState({ pageNum: this.state.pageNum + 1 });
       }
       // this.setState({currentAnimationName: animation_LottieLogo2});
       // this.setState({currentAnimationDIV: <ReactBodymovin options={{loop: true, autoplay: true, prerender: true, animationData: animation_LottieLogo2}} />});

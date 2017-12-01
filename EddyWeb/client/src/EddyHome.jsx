@@ -307,14 +307,15 @@ returnCurrentAnimation(props)
     // alert("clicked")
     if(this.state.pageNum + 1 == this.state.NumberOfStorieAnimations)
     {
+      console.log(this.state.listOfStoryURLS[this.state.pageNum]);
       
       this.setState({pageNum: 0});
-      console.log(this.state.listOfStoryURLS[this.state.pageNum]);
     }
     else
     {
-      this.setState({pageNum: this.state.pageNum + 1});
       console.log(this.state.listOfStoryURLS[this.state.pageNum]);
+      
+      this.setState({pageNum: this.state.pageNum + 1});
 
     }
     // this.setState({currentAnimationName: animation_LottieLogo2});

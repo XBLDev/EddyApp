@@ -1,4 +1,4 @@
 {
-  "dbUri": "mongodb://SOMEURL",
+  "dbUri": "mongodb://xbldevFCCCIDev:Maggie_11111@ds129723.mlab.com:29723/flyabove",
   "jwtSecret": "a secret phrase!!"
 }

@@ -332,8 +332,8 @@ router.get('/EddyStories', (req, res) => {
 
 
             var animationsNeedDownload = [];
-            checkIfFilesExist(https, fs, animationsNeedDownload, Values[0]['storyFileUrls'], 0 , 
-            Values[0]['storyFileUrls'].length, animationNames, res);
+            checkIfFilesExist(https, fs, animationsNeedDownload, Values[1]['storyFileUrls'], 0 , 
+            Values[1]['storyFileUrls'].length, animationNames, res);
             // testfunc(0, res);
             // downloadAllAnimations(https, fs, Values[0]['storyFileUrls'], animationNames, 0, 
             // animationsNeedDownload.length,

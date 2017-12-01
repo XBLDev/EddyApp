@@ -52,7 +52,7 @@ export default class App extends Component<{}> {
               width: 200,
               height: 200,
             }}
-            source={require('animations/Group1Image2HospitalBed.json')} 
+            source={require('animations/Group3Image13FallingShoes.json')} 
             loop 
             easing={easing} 
          />

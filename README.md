@@ -1,6 +1,11 @@
 # EddyApp
 Educational App made with ReactNative/ReactJS + Lottie/Bodymovin Plugin. Currently hosted on Amazon EC2, Ubuntu instance.
 
+Comment 01/12/2017, 6:56:
+
+Added a simple animation JSON file uploader, basically use FileReader.readAsArrayBuffer(f) to read the file, and use 
+the returned arraybuffer in the callback function as the body to upload to S3.
+
 Comment 15/11/2017, 5:27:
 
 Tested 2 animations, the same error that happens when testing other animations which use images, they don't seem to work on android. Post issue about this: https://github.com/airbnb/lottie-react-native/issues/228
