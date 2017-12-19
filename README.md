@@ -1,6 +1,10 @@
 # EddyApp
 Educational App made with ReactNative/ReactJS + Lottie/Bodymovin Plugin. Currently hosted on Amazon EC2, Ubuntu instance.
 
+Comment 19/12/2017: 7:50:
+
+Now each animation is downloaded to its dedicated folder along with the image files it uses to be rendered properly.
+
 Comment 01/12/2017, 6:56:
 
 Added a simple animation JSON file uploader, basically use FileReader.readAsArrayBuffer(f) to read the file, and use 
