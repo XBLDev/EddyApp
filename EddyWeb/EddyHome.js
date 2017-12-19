@@ -18,11 +18,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // const apiRoutes = require('./server/routes/api');
 // const newsRoutes = require('./server/routes/news');
 const EddyStoriesRoutes = require('./server/routes/EddyStories');
+const EddyStoriesWithImagesRoutes = require('./server/routes/EddyStoriesWithImages');
 
 // app.use('/auth', authRoutes);
 // app.use('/api', apiRoutes);
 // app.use('/news', newsRoutes);
 app.use('/EddyStories', EddyStoriesRoutes);
+app.use('/EddyStoriesWithImages', EddyStoriesWithImagesRoutes);
 
 
 // start the server

@@ -22907,9 +22907,11 @@ var EddyHome = function (_Component) {
       //   path: './LottieLogo1.json'
       // })
 
-
+      //"./animations/Group3Image1.json"
       var xhr = new XMLHttpRequest();
-      xhr.open('get', '/EddyStories/EddyStories');
+      // xhr.open('get', '/EddyStories/EddyStories');
+      xhr.open('get', '/EddyStoriesWithImages/EddyStoriesWithImages');
+
       // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
       // set the authorization HTTP header
       // xhr.setRequestHeader('Authorization', `bearer ${Auth.getToken()}`);
@@ -23028,6 +23030,11 @@ var EddyHome = function (_Component) {
             'div',
             { className: 'innerContainer', onClick: this.handleClick },
             this.state.animationsLoaded == true ? sas : 'LOADING ANIMATIONS FROM BACK END, PLEASE WAIT......'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'animationNameArea' },
+            this.state.animationsLoaded == true ? this.state.listOfStoryURLS[this.state.pageNum] : 'no animation loaded'
           )
         ),
         _react2.default.createElement(

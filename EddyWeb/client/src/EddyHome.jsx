@@ -243,9 +243,11 @@ class EddyHome extends Component {
 //   path: './LottieLogo1.json'
 // })
 
+//"./animations/Group3Image1.json"
+    const xhr = new XMLHttpRequest();
+    // xhr.open('get', '/EddyStories/EddyStories');
+    xhr.open('get', '/EddyStoriesWithImages/EddyStoriesWithImages');
 
-const xhr = new XMLHttpRequest();
-    xhr.open('get', '/EddyStories/EddyStories');
     // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     // set the authorization HTTP header
     // xhr.setRequestHeader('Authorization', `bearer ${Auth.getToken()}`);
@@ -384,6 +386,17 @@ returnCurrentAnimation(props)
 
                        
                 </div>
+                <div className="animationNameArea">
+                    {/* animation names */}
+                    {this.state.animationsLoaded == true?
+                          (
+                              this.state.listOfStoryURLS[this.state.pageNum]
+                          ):
+                          (
+                              'no animation loaded'
+                          )
+                    }    
+                </div>  
 
             </div>
 

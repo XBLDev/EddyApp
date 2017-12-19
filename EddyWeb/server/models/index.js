@@ -20,4 +20,6 @@ module.exports.connect = (uri) => {
   // require('./user');
   // require('./newsInfo');
   require('./EddyStory');
+  require('./EddyStoryWithImage');
+  
 };
