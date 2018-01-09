@@ -1,6 +1,14 @@
 # EddyApp
 Educational App made with ReactNative/ReactJS + Lottie/Bodymovin Plugin. Currently hosted on Amazon EC2, Ubuntu instance.
 
+Comment 09/01/2017: 1:31:
+
+Added EddyWebMinimal, which uses the minimal setup from the official lottie web website.
+
+How to use:
+1. download all the files to a folder
+2. Open CMD, cd to that folder, run "npm install" then "npm start"
+
 Comment 19/12/2017: 7:50:
 
 Now each animation is downloaded to its dedicated folder along with the image files it uses to be rendered properly.
